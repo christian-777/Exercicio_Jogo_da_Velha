@@ -6,7 +6,7 @@
         int l, c;
         for(int i = 0; i < 9; i++)
         {
-            exibir();
+            exibir(velha);
 
             Console.WriteLine("digite a linha que quer colocar: ");
             l = int.Parse(Console.ReadLine());
@@ -24,10 +24,17 @@
                     velha[l, c] = 2;
                 }
 
-                if (VenceuHorizontal() || VenceuVertical() || VenceuDiagonalPrincial() || VenceuDiagonalSecundaria())
+                if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
                 {
-                    Console.WriteLine("ganhou");
-                    exibir();
+                    if (i % 2 == 0)
+                    {
+                        Console.WriteLine("o primeiro jogador ganhou");
+                    }
+                    else
+                    {
+                        Console.WriteLine("o segundo jogador ganhou");
+                    }
+                    exibir(velha);
                     break;
                 }
                 
@@ -40,7 +47,7 @@
 
         }
 
-        void exibir()
+        void exibir(int[,] velha)
         {
             for (int j = 0; j < 3; j++)
             {
@@ -52,7 +59,7 @@
             }
         }
 
-        bool VenceuHorizontal()
+        bool VenceuHorizontal(int[,] velha)
         {
             int valida, igual=0;
 
@@ -66,7 +73,6 @@
                         if (valida == 0)
                         {
                             igual = velha[l, c];
-                            //Console.WriteLine(igual);
                             valida++;
                         }
                         else
@@ -75,7 +81,6 @@
                             {
                                 valida++;
                                 igual = velha[l, c];
-                                //Console.WriteLine(igual);
                             }
                         }
                     }
@@ -91,7 +96,7 @@
         }
 
 
-        bool VenceuVertical()
+        bool VenceuVertical(int[,] velha)
         {
             int valida, igual = 0;
 
@@ -105,7 +110,6 @@
                         if (valida == 0)
                         {
                             igual = velha[l, c];
-                            //Console.WriteLine(igual);
                             valida++;
                         }
                         else
@@ -131,7 +135,7 @@
 
 
 
-        bool VenceuDiagonalPrincial()
+        bool VenceuDiagonalPrincial(int[,] velha)
         {
             int valida=0, igual = 0;
 
@@ -143,7 +147,6 @@
                     if (l == 0)
                     {
                         igual = velha[l, l];
-                        //Console.WriteLine(igual);
                         valida++;
                     }
                     else
@@ -152,7 +155,6 @@
                         {
                             valida++;
                             igual = velha[l, l];
-                            //Console.WriteLine(igual);
                         }
                     }
                 }
@@ -167,7 +169,7 @@
         }
 
 
-        bool VenceuDiagonalSecundaria()
+        bool VenceuDiagonalSecundaria(int[,] velha)
         {
             int valida = 0, igual = 0;
 
@@ -179,7 +181,6 @@
                     if (l == 0)
                     {
                         igual = velha[l, 2-l];
-                        //Console.WriteLine(igual);
                         valida++;
                     }
                     else
