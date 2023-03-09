@@ -24,18 +24,21 @@
                     velha[l, c] = 2;
                 }
 
-                if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
+                if (i >= 4)
                 {
-                    if (i % 2 == 0)
+                    if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
                     {
-                        Console.WriteLine("o primeiro jogador ganhou");
+                        if (i % 2 == 0)
+                        {
+                            Console.WriteLine("o primeiro jogador ganhou");
+                        }
+                        else
+                        {
+                            Console.WriteLine("o segundo jogador ganhou");
+                        }
+                        exibir(velha);
+                        break;
                     }
-                    else
-                    {
-                        Console.WriteLine("o segundo jogador ganhou");
-                    }
-                    exibir(velha);
-                    break;
                 }
                 
             }
