@@ -13,39 +13,47 @@
             Console.WriteLine("digite a coluna que quer colocar: ");
             c = int.Parse(Console.ReadLine());
 
-            if (velha[l, c] == 0)
+            if (l < 3 && c < 3)
             {
-                if(i%2 == 0)
+                if (velha[l, c] == 0)
                 {
-                    velha[l, c] = 1;
+                    if (i % 2 == 0)
+                    {
+                        velha[l, c] = 1;
+                    }
+                    else
+                    {
+                        velha[l, c] = 2;
+                    }
+
+                    if (i >= 4)
+                    {
+                        if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
+                        {
+                            if (i % 2 == 0)
+                            {
+                                Console.WriteLine("o primeiro jogador ganhou");
+                            }
+                            else
+                            {
+                                Console.WriteLine("o segundo jogador ganhou");
+                            }
+                            exibir(velha);
+                            break;
+                        }
+                    }
+
                 }
                 else
                 {
-                    velha[l, c] = 2;
+                    Console.WriteLine("ja tem coisa ai mano");
+                    i--;
                 }
-
-                if (i >= 4)
-                {
-                    if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
-                    {
-                        if (i % 2 == 0)
-                        {
-                            Console.WriteLine("o primeiro jogador ganhou");
-                        }
-                        else
-                        {
-                            Console.WriteLine("o segundo jogador ganhou");
-                        }
-                        exibir(velha);
-                        break;
-                    }
-                }
-                
             }
             else
             {
-                Console.WriteLine("ja tem coisa ai mano");
-                i--; 
+                Console.WriteLine("posição invalida");
+                i--;
             }
 
         }
