@@ -3,17 +3,82 @@
     private static void Main(string[] args)
     {
         int[,] velha = new int[3, 3];
-        int l, c;
+        int l=0, c=0, esc;
+        char jogador;
+        bool certo;
+
         for(int i = 0; i < 9; i++)
         {
+            Console.Clear();
             exibir(velha);
+            if (i % 2 == 0)
+            {
+                jogador = 'X';
+            }
+            else
+            {
+                jogador = 'O';
+            }
 
-            Console.WriteLine("digite a linha que quer colocar: ");
-            l = int.Parse(Console.ReadLine());
-            Console.WriteLine("digite a coluna que quer colocar: ");
-            c = int.Parse(Console.ReadLine());
+            Console.WriteLine("digite onde deseja jogar jogador \""+jogador+"\""+": ");
+            esc = int.Parse(Console.ReadLine());
 
-            if (l < 3 && c < 3)
+            certo = true;
+
+            switch (esc)
+            {
+                case 1:
+                    l = 0;
+                    c = 0;
+                    break;
+
+                case 2:
+                    l = 0;
+                    c = 1;
+                    break;
+
+                case 3:
+                    l = 0;
+                    c = 2;
+                    break;
+
+                case 4:
+                    l = 1;
+                    c = 0;
+                    break;
+
+                case 5:
+                    l = 1;
+                    c = 1;
+                    break;
+
+                case 6:
+                    l = 1;
+                    c = 2;
+                    break;
+
+                case 7:
+                    l = 2;
+                    c = 0;
+                    break;
+
+                case 8:
+                    l = 2;
+                    c = 1;
+                    break;
+
+                case 9:
+                    l = 2;
+                    c = 2;
+                    break;
+
+                default:
+                    certo = false;
+                    Console.WriteLine("posição invalida");
+                    break;
+            }
+
+            if (certo)
             {
                 if (velha[l, c] == 0)
                 {
@@ -30,14 +95,9 @@
                     {
                         if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
                         {
-                            if (i % 2 == 0)
-                            {
-                                Console.WriteLine("o primeiro jogador ganhou");
-                            }
-                            else
-                            {
-                                Console.WriteLine("o segundo jogador ganhou");
-                            }
+                            Console.Clear();
+                            Console.WriteLine("o jogador \""+jogador+"\""+" ganhou");
+                          
                             exibir(velha);
                             break;
                         }
@@ -46,28 +106,38 @@
                 }
                 else
                 {
-                    Console.WriteLine("ja tem coisa ai mano");
+                    Console.WriteLine("nao eh permitido sobregravar");
                     i--;
                 }
             }
-            else
-            {
-                Console.WriteLine("posição invalida");
-                i--;
-            }
-
         }
+        Console.ReadKey();
 
         void exibir(int[,] velha)
         {
+            Console.WriteLine();
+            int i = 1;
             for (int j = 0; j < 3; j++)
             {
                 for (int k = 0; k < 3; k++)
                 {
-                    Console.Write(velha[j, k] + " ");
+                    if (velha[j, k] == 1)
+                    {
+                        Console.Write("X ");
+                    }
+                    else if (velha[j, k] == 2)
+                    {
+                        Console.Write("O ");
+                    }
+                    else
+                    {
+                        Console.Write(i+" ");
+                    }
+                    i++;
                 }
-                Console.WriteLine();
+                Console.WriteLine("");
             }
+            Console.WriteLine();
         }
 
         bool VenceuHorizontal(int[,] velha)
@@ -129,7 +199,6 @@
                             {
                                 valida++;
                                 igual = velha[l, c];
-                                Console.WriteLine(igual);
                             }
                         }
                     }
@@ -200,7 +269,6 @@
                         {
                             valida++;
                             igual = velha[l, 2-l];
-                            Console.WriteLine(igual);
                         }
                     }
                 }
