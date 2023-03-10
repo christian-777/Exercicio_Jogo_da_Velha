@@ -6,8 +6,9 @@
         int l=0, c=0, esc;
         char jogador;
         bool certo;
+        int i;
 
-        for(int i = 0; i < 9; i++)
+        for(i = 0; i < 9; i++)
         {
             Console.Clear();
             exibir(velha);
@@ -110,6 +111,10 @@
                     i--;
                 }
             }
+        }
+        if (i == 8)
+        {
+            Console.WriteLine("a velha venceu");
         }
         Console.ReadKey();
 
