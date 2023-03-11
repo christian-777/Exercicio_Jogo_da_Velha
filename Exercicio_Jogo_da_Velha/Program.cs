@@ -7,6 +7,7 @@
         char jogador;
         bool certo;
         int i;
+        string aux;
 
         for(i = 0; i < 9; i++)
         {
@@ -22,7 +23,15 @@
             }
 
             Console.WriteLine("digite onde deseja jogar jogador \""+jogador+"\""+": ");
-            esc = int.Parse(Console.ReadLine());
+            aux=Console.ReadLine();
+
+            if (!int.TryParse(aux, out esc))
+            {
+                i--;
+                Console.WriteLine("posicao invalida");
+                Console.ReadKey();
+                continue;
+            }
 
             certo = true;
 
@@ -76,6 +85,8 @@
                 default:
                     certo = false;
                     Console.WriteLine("posição invalida");
+                    i--;
+                    Console.ReadKey();
                     break;
             }
 
@@ -91,7 +102,7 @@
                     {
                         velha[l, c] = 2;
                     }
-
+          
                     if (i >= 4)
                     {
                         if (VenceuHorizontal(velha) || VenceuVertical(velha) || VenceuDiagonalPrincial(velha) || VenceuDiagonalSecundaria(velha))
@@ -108,11 +119,13 @@
                 else
                 {
                     Console.WriteLine("nao eh permitido sobregravar");
+                    Console.ReadKey();
                     i--;
                 }
             }
+            
         }
-        if (i == 8)
+        if (i == 9)
         {
             Console.WriteLine("a velha venceu");
         }
